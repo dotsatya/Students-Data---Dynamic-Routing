@@ -1,0 +1,229 @@
+<!-- <p>profile works!</p>
+<h1>Profile Page</h1> -->
+
+<!-- <p>Student ID: {{ userId }}</p> -->
+
+<!-- <p>Student Name: {{ student.name }}</p> -->
+
+<div class="min-h-screen bg-slate-50 px-4 py-8 sm:px-6 lg:px-8">
+  <div class="mx-auto max-w-5xl">
+    <!-- ================= PROFILE HEADER ================= -->
+    <div class="overflow-hidden rounded-3xl bg-white shadow-xl">
+      <!-- Cover -->
+      <div class="relative h-40 mb-4 bg-gradient-to-r from-slate-900 via-indigo-900 to-indigo-600">
+        <div class="absolute -right-20 -top-24 h-72 w-72 rounded-full bg-white/10 blur-3xl"></div>
+
+        <div
+          class="absolute -bottom-20 left-1/3 h-56 w-56 rounded-full bg-blue-400/10 blur-3xl"
+        ></div>
+      </div>
+
+      <!-- Identity -->
+      <div class="relative px-6 pb-6 sm:px-8">
+        <div class="-mt-16 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+          <!-- Avatar + Name -->
+          <div class="flex items-end gap-4">
+            <div
+              class="flex h-32 w-32 shrink-0 items-center justify-center rounded-3xl border-8 border-white bg-indigo-600 text-5xl font-bold text-white shadow-lg"
+            >
+              {{ student?.name?.charAt(0) }}
+            </div>
+
+            <div class="pb-2">
+              <h1 class="text-3xl font-bold tracking-tight text-slate-900">
+                {{ student?.name }}
+              </h1>
+
+              <p class="mt-1 text-slate-500">
+                {{ student?.department }}
+              </p>
+            </div>
+          </div>
+
+          <!-- Student ID -->
+          <div class="rounded-xl bg-slate-100 px-5 py-3">
+            <p class="text-xs font-semibold uppercase tracking-wider text-slate-400">Student ID</p>
+
+            <p class="mt-1 text-xl font-bold text-slate-800">#{{ student?.id }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= ACADEMIC + CONTACT ================= -->
+    <div class="mt-6 grid gap-6 lg:grid-cols-2">
+      <!-- Academic Information -->
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <div class="mb-6 flex items-center gap-3">
+          <div
+            class="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-100 text-indigo-600"
+          >
+            🎓
+          </div>
+
+          <div>
+            <h2 class="text-lg font-bold text-slate-900">Academic Information</h2>
+
+            <p class="text-sm text-slate-500">Student academic details</p>
+          </div>
+        </div>
+
+        <div class="grid gap-5 sm:grid-cols-2">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wide text-slate-400">Roll Number</p>
+
+            <p class="mt-1 font-semibold text-slate-800">
+              {{ student?.rollNo }}
+            </p>
+          </div>
+
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wide text-slate-400">Department</p>
+
+            <p class="mt-1 font-semibold text-slate-800">
+              {{ student?.department }}
+            </p>
+          </div>
+
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wide text-slate-400">
+              Academic Year
+            </p>
+
+            <p class="mt-1 font-semibold text-slate-800">Year {{ student?.year }}</p>
+          </div>
+
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wide text-slate-400">Student ID</p>
+
+            <p class="mt-1 font-semibold text-slate-800">
+              {{ student?.id }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Information -->
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <div class="mb-6 flex items-center gap-3">
+          <div
+            class="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-100 text-emerald-600"
+          >
+            ✉
+          </div>
+
+          <div>
+            <h2 class="text-lg font-bold text-slate-900">Contact Information</h2>
+
+            <p class="text-sm text-slate-500">Student contact details</p>
+          </div>
+        </div>
+
+        <div class="space-y-5">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wide text-slate-400">Email</p>
+
+            <p class="mt-1 break-all font-medium text-slate-800">
+              {{ student?.email }}
+            </p>
+          </div>
+
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wide text-slate-400">Phone</p>
+
+            <p class="mt-1 font-medium text-slate-800">
+              {{ student?.phone }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= EXAMINATION RESULTS ================= -->
+    <div class="mt-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+      <div class="mb-6 flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
+        <div>
+          <h2 class="text-xl font-bold text-slate-900">Examination Results</h2>
+
+          <p class="mt-1 text-sm text-slate-500">Subject-wise performance</p>
+        </div>
+
+        <div
+          class="w-fit rounded-full bg-indigo-50 px-4 py-2 text-sm font-semibold text-indigo-600"
+        >
+          {{ student?.subjects?.length }} Subjects
+        </div>
+      </div>
+
+      <!-- Table -->
+      <div class="overflow-hidden rounded-xl border border-slate-200">
+        <!-- Table Header -->
+        <div
+          class="grid grid-cols-[1fr_100px] bg-slate-100 px-5 py-3 text-xs font-bold uppercase tracking-wider text-slate-500"
+        >
+          <span>Subject</span>
+          <span class="text-right">Marks</span>
+        </div>
+
+        <!-- Subjects -->
+        @for (subject of student?.subjects; track $index) {
+          <div
+            class="grid grid-cols-[1fr_100px] items-center border-t border-slate-200 px-5 py-4 transition-colors hover:bg-slate-50"
+          >
+            <div>
+              <p class="font-medium text-slate-800">
+                {{ subject }}
+              </p>
+
+              <p class="mt-1 text-xs text-slate-400">Final Examination</p>
+            </div>
+
+            <div class="text-right">
+              <span
+                class="inline-flex min-w-16 justify-center rounded-lg px-3 py-2 text-sm font-bold"
+                [class.bg-green-100]="student.marks[$index] >= 80"
+                [class.text-green-700]="student.marks[$index] >= 80"
+                [class.bg-yellow-100]="student.marks[$index] >= 50 && student.marks[$index] < 80"
+                [class.text-yellow-700]="student.marks[$index] >= 50 && student.marks[$index] < 80"
+                [class.bg-red-100]="student.marks[$index] < 50"
+                [class.text-red-700]="student.marks[$index] < 50"
+              >
+                {{ student.marks[$index] }}/100
+              </span>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- ================= SPORTS ================= -->
+    <div class="mt-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+      <div class="mb-5 flex items-center gap-3">
+        <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-100">🏆</div>
+
+        <div>
+          <h2 class="text-lg font-bold text-slate-900">Sports & Activities</h2>
+
+          <p class="text-sm text-slate-500">Extracurricular activities</p>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-3">
+        @for (sport of student?.sports; track sport) {
+          <span
+            class="rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700"
+          >
+            {{ sport }}
+          </span>
+        }
+      </div>
+    </div>
+
+    <!-- ================= FOOTER ================= -->
+    <div class="mt-6 text-center">
+      <p class="text-sm text-slate-400">
+        Student ID #{{ student?.id }} · {{ student?.department }}
+      </p>
+    </div>
+  </div>
+</div>
